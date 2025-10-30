@@ -28,20 +28,82 @@ export default function Checkout() {
   }
 
   return (
-    <div>
-      <h2 className="text-xl font-semibold mb-4">Checkout</h2>
-      <div className="space-y-3 max-w-md">
-        <div>Items: {cart.length}</div>
-        <div>Total: ₹{total}</div>
-        <input value={name} onChange={(e) => setName(e.target.value)} placeholder="Name" className="w-full p-2 border rounded" />
-        <input value={phone} onChange={(e) => setPhone(e.target.value)} placeholder="Phone" className="w-full p-2 border rounded" />
-        <input value={city} onChange={(e) => setCity(e.target.value)} placeholder="City" className="w-full p-2 border rounded" />
-        <div className="flex gap-2">
-          <button onClick={() => navigate('/cart')} className="px-3 py-1 border rounded">Back to cart</button>
-          <button onClick={placeOrder} className="px-3 py-1 bg-green-600 text-white rounded">Place Order</button>
+    <div className="max-w-4xl mx-auto">
+      <h2 className="text-3xl font-bold mb-8 text-center">Checkout</h2>
+      
+      <div className="bg-white rounded-lg shadow-lg p-8">
+        <div className="grid md:grid-cols-2 gap-8">
+          {/* Order Summary */}
+          <div>
+            <h3 className="text-xl font-bold mb-4">Order Summary</h3>
+            <div className="space-y-4">
+              <div className="bg-gray-50 p-4 rounded-lg">
+                <div className="font-medium">Items: {cart.length}</div>
+                <div className="text-2xl font-bold text-blue-600">Total: ₹{total}</div>
+              </div>
+              <div className="space-y-2">
+                {cart.map((item, idx) => (
+                  <div key={idx} className="flex justify-between">
+                    <span className="font-medium">{item.name}</span>
+                    <span>₹{item.price}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          {/* Delivery Details */}
+          <div>
+            <h3 className="text-xl font-bold mb-4">Delivery Details</h3>
+            <div className="space-y-4">
+              <input 
+                value={name} 
+                onChange={(e) => setName(e.target.value)} 
+                placeholder="Full Name" 
+                className="w-full p-3 border-2 rounded-lg focus:border-blue-600 focus:ring-1 focus:ring-blue-600 outline-none font-medium"
+              />
+              <input 
+                value={phone} 
+                onChange={(e) => setPhone(e.target.value)} 
+                placeholder="Phone Number" 
+                className="w-full p-3 border-2 rounded-lg focus:border-blue-600 focus:ring-1 focus:ring-blue-600 outline-none font-medium"
+              />
+              <input 
+                value={city} 
+                onChange={(e) => setCity(e.target.value)} 
+                placeholder="City (Chennai only)" 
+                className="w-full p-3 border-2 rounded-lg focus:border-blue-600 focus:ring-1 focus:ring-blue-600 outline-none font-medium"
+              />
+            </div>
+          </div>
         </div>
-        {status && <div className="mt-2 p-2 bg-gray-100 rounded">{status}</div>}
+
+        <div className="mt-8 flex justify-end gap-4">
+          <button 
+            onClick={() => navigate('/cart')} 
+            className="px-6 py-3 border-2 border-blue-600 text-blue-600 rounded-lg font-bold hover:bg-blue-50 transition-colors"
+          >
+            Back to Cart
+          </button>
+          <button 
+            onClick={placeOrder} 
+            className="px-8 py-3 bg-blue-600 text-white rounded-lg font-bold hover:bg-blue-700 transition-colors"
+          >
+            Place Order
+          </button>
+        </div>
+
+        {status && (
+          <div className={`mt-4 p-4 rounded-lg font-bold text-center ${
+            status.startsWith('Order placed') 
+              ? 'bg-green-100 text-green-700' 
+              : 'bg-red-100 text-red-700'
+          }`}>
+            {status}
+          </div>
+        )}
       </div>
     </div>
   )
+}
 }

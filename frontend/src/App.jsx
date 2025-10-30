@@ -8,12 +8,17 @@ import Checkout from './pages/Checkout'
 export default function App() {
   return (
     <div className="min-h-screen bg-gray-50">
-      <nav className="bg-white shadow p-4">
-        <div className="container mx-auto flex justify-between">
-          <Link to="/" className="font-bold">GoEats Chennai</Link>
-          <div className="space-x-4">
-            <Link to="/menu">Menu</Link>
-            <Link to="/cart">Cart</Link>
+      <nav className="bg-white shadow-lg">
+        <div className="container mx-auto px-4 py-3">
+          <div className="flex items-center justify-between">
+            <Link to="/" className="flex items-center space-x-2">
+              <img src="/images/logo.svg" alt="GoEats Logo" className="w-10 h-10" />
+              <span className="font-bold text-xl text-blue-600">GoEats Chennai</span>
+            </Link>
+            <div className="space-x-6 font-medium">
+              <Link to="/menu" className="hover:text-blue-600 transition-colors">Menu</Link>
+              <Link to="/cart" className="hover:text-blue-600 transition-colors">Cart</Link>
+            </div>
           </div>
         </div>
       </nav>

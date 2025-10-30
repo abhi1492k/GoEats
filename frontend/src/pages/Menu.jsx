@@ -22,17 +22,27 @@ export default function Menu() {
   }
 
   return (
-    <div>
-      <h2 className="text-xl font-semibold mb-4">Menu</h2>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+    <div className="max-w-6xl mx-auto">
+      <h2 className="text-3xl font-bold mb-8 text-center">Our Menu</h2>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {items.map((it) => (
-          <div key={it.id} className="bg-white p-4 rounded shadow">
-            <div className="font-medium">{it.name}</div>
-            <div className="text-sm text-gray-600">{it.category}</div>
-            <div className="mt-2">₹{it.price}</div>
-            <div className="mt-3 flex gap-2">
-              <button onClick={() => addToCart(it)} className="px-3 py-1 bg-green-600 text-white rounded">Add</button>
-              <button onClick={() => navigate('/cart')} className="px-3 py-1 border rounded">Go to cart</button>
+          <div key={it.id} className="bg-white p-6 rounded-lg shadow-lg transform hover:scale-105 transition-transform">
+            <div className="font-bold text-xl mb-2">{it.name}</div>
+            <div className="text-blue-600 font-medium mb-3">{it.category}</div>
+            <div className="text-2xl font-bold mb-4">₹{it.price}</div>
+            <div className="flex gap-3">
+              <button 
+                onClick={() => addToCart(it)} 
+                className="flex-1 bg-blue-600 text-white py-2 rounded-lg font-bold hover:bg-blue-700 transition-colors"
+              >
+                Add to Cart
+              </button>
+              <button 
+                onClick={() => navigate('/cart')} 
+                className="px-4 py-2 border-2 border-blue-600 text-blue-600 rounded-lg font-bold hover:bg-blue-50 transition-colors"
+              >
+                View Cart
+              </button>
             </div>
           </div>
         ))}
