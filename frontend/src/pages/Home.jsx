@@ -4,17 +4,19 @@ import { Link } from 'react-router-dom'
 export default function Home() {
   return (
     <div className="text-center space-y-8">
-      <div className="relative h-[500px] bg-gradient-to-r from-purple-600 to-blue-600 rounded-lg overflow-hidden">
-        <div className="absolute inset-0 bg-black/40 flex flex-col items-center justify-center text-white p-8">
+      <div className="relative h-[500px] bg-gradient-to-r from-accent to-primary rounded-lg overflow-hidden">
+        <div className="absolute inset-0 bg-black/20 flex flex-col items-center justify-center text-white p-8">
           <img src="/images/logo.svg" alt="GoEats Logo" className="w-24 h-24 mb-6" />
           <h1 className="text-4xl font-bold mb-4">GoEats — Chennai Cloud Kitchen</h1>
           <p className="text-xl font-medium mb-8">Fresh homestyle food delivered within Chennai</p>
           <Link 
             to="/menu" 
-            className="bg-white text-blue-600 px-8 py-3 rounded-full font-bold text-lg hover:bg-blue-50 transition-colors"
+            className="bg-primary text-white px-8 py-3 rounded-full font-bold text-lg hover:bg-primary-600 transition-colors"
           >
             Browse Our Menu
           </Link>
+          {/* South Indian foods artwork */}
+          <img src="/images/south_indian_foods.svg" alt="South Indian foods" className="absolute right-6 bottom-6 w-56 opacity-95 hidden md:block" />
         </div>
       </div>
 

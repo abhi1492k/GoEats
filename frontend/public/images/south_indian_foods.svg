@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600">
+  <defs>
+    <linearGradient id="g1" x1="0" x2="1">
+      <stop offset="0%" stop-color="#F6C85F"/>
+      <stop offset="100%" stop-color="#D33F49"/>
+    </linearGradient>
+  </defs>
+  <rect width="100%" height="100%" fill="transparent" />
+  <!-- Plate -->
+  <ellipse cx="400" cy="380" rx="260" ry="80" fill="#fff8e6" stroke="#e6d6a3" stroke-width="4"/>
+  <!-- Dosa -->
+  <path d="M180 300 Q320 150 520 270 Q420 340 220 320 Z" fill="#f4c27a" stroke="#d59b4f" stroke-width="3" />
+  <!-- Idli (3) -->
+  <g transform="translate(200,260)">
+    <circle cx="0" cy="0" r="28" fill="#fff" stroke="#e6e6e6" stroke-width="2" />
+    <circle cx="60" cy="-10" r="28" fill="#fff" stroke="#e6e6e6" stroke-width="2" />
+    <circle cx="110" cy="10" r="28" fill="#fff" stroke="#e6e6e6" stroke-width="2" />
+  </g>
+  <!-- Sambar bowl -->
+  <g transform="translate(480,340)">
+    <ellipse cx="0" cy="0" rx="46" ry="22" fill="#b33" />
+    <rect x="-46" y="-20" width="92" height="40" rx="10" ry="10" fill="#c44" />
+    <ellipse cx="0" cy="10" rx="34" ry="12" fill="#d66" />
+  </g>
+  <!-- Coconut chutney small bowl -->
+  <g transform="translate(420,300)">
+    <ellipse cx="0" cy="0" rx="28" ry="14" fill="#9fd3b8" />
+    <rect x="-28" y="-14" width="56" height="28" rx="6" ry="6" fill="#a0e0c4" />
+  </g>
+  <!-- Garnish and details -->
+  <g fill="#6b4a2a" opacity="0.9">
+    <circle cx="330" cy="240" r="4" />
+    <circle cx="360" cy="250" r="3" />
+    <circle cx="390" cy="260" r="3" />
+  </g>
+  <text x="40" y="520" font-family="sans-serif" font-size="20" fill="#6b4a2a">South Indian favourites — dosa, idli, sambar</text>
+</svg>

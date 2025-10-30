@@ -1,6 +1,6 @@
 [build]
-  # Install both frontend and functions deps, then build the frontend
-  command = "npm run install:all && npm run build --prefix frontend"
+  # Install and build frontend
+  command = "cd frontend && npm install && npm run build"
   publish = "frontend/dist"
   functions = "functions"
 

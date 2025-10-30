@@ -39,7 +39,7 @@ export default function Checkout() {
             <div className="space-y-4">
               <div className="bg-gray-50 p-4 rounded-lg">
                 <div className="font-medium">Items: {cart.length}</div>
-                <div className="text-2xl font-bold text-blue-600">Total: ₹{total}</div>
+                <div className="text-2xl font-bold text-primary">Total: ₹{total}</div>
               </div>
               <div className="space-y-2">
                 {cart.map((item, idx) => (
@@ -60,19 +60,19 @@ export default function Checkout() {
                 value={name} 
                 onChange={(e) => setName(e.target.value)} 
                 placeholder="Full Name" 
-                className="w-full p-3 border-2 rounded-lg focus:border-blue-600 focus:ring-1 focus:ring-blue-600 outline-none font-medium"
+                className="w-full p-3 border-2 rounded-lg focus:border-primary focus:ring-1 focus:ring-primary outline-none font-medium"
               />
               <input 
                 value={phone} 
                 onChange={(e) => setPhone(e.target.value)} 
                 placeholder="Phone Number" 
-                className="w-full p-3 border-2 rounded-lg focus:border-blue-600 focus:ring-1 focus:ring-blue-600 outline-none font-medium"
+                className="w-full p-3 border-2 rounded-lg focus:border-primary focus:ring-1 focus:ring-primary outline-none font-medium"
               />
               <input 
                 value={city} 
                 onChange={(e) => setCity(e.target.value)} 
                 placeholder="City (Chennai only)" 
-                className="w-full p-3 border-2 rounded-lg focus:border-blue-600 focus:ring-1 focus:ring-blue-600 outline-none font-medium"
+                className="w-full p-3 border-2 rounded-lg focus:border-primary focus:ring-1 focus:ring-primary outline-none font-medium"
               />
             </div>
           </div>
@@ -81,13 +81,13 @@ export default function Checkout() {
         <div className="mt-8 flex justify-end gap-4">
           <button 
             onClick={() => navigate('/cart')} 
-            className="px-6 py-3 border-2 border-blue-600 text-blue-600 rounded-lg font-bold hover:bg-blue-50 transition-colors"
+            className="px-6 py-3 border-2 border-primary text-primary rounded-lg font-bold hover:bg-primary/10 transition-colors"
           >
             Back to Cart
           </button>
           <button 
             onClick={placeOrder} 
-            className="px-8 py-3 bg-blue-600 text-white rounded-lg font-bold hover:bg-blue-700 transition-colors"
+            className="px-8 py-3 bg-primary text-white rounded-lg font-bold hover:bg-primary-600 transition-colors"
           >
             Place Order
           </button>
@@ -105,5 +105,4 @@ export default function Checkout() {
       </div>
     </div>
   )
-}
 }

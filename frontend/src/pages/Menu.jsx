@@ -33,13 +33,13 @@ export default function Menu() {
             <div className="flex gap-3">
               <button 
                 onClick={() => addToCart(it)} 
-                className="flex-1 bg-blue-600 text-white py-2 rounded-lg font-bold hover:bg-blue-700 transition-colors"
+                className="flex-1 bg-primary text-white py-2 rounded-lg font-bold hover:bg-primary-600 transition-colors"
               >
                 Add to Cart
               </button>
               <button 
                 onClick={() => navigate('/cart')} 
-                className="px-4 py-2 border-2 border-blue-600 text-blue-600 rounded-lg font-bold hover:bg-blue-50 transition-colors"
+                className="px-4 py-2 border-2 border-primary text-primary rounded-lg font-bold hover:bg-primary/10 transition-colors"
               >
                 View Cart
               </button>

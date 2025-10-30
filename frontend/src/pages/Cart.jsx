@@ -23,7 +23,7 @@ export default function Cart() {
           <p className="text-xl font-medium mb-4">Your cart is empty</p>
           <Link 
             to="/menu" 
-            className="inline-block bg-blue-600 text-white px-8 py-3 rounded-full font-bold hover:bg-blue-700 transition-colors"
+            className="inline-block bg-primary text-white px-8 py-3 rounded-full font-bold hover:bg-primary-600 transition-colors"
           >
             Browse Our Menu
           </Link>
@@ -35,7 +35,7 @@ export default function Cart() {
               <div key={idx} className="flex items-center justify-between p-4 border rounded-lg">
                 <div>
                   <div className="font-bold text-lg">{it.name}</div>
-                  <div className="text-blue-600 font-medium">₹{it.price}</div>
+                  <div className="text-primary font-medium">₹{it.price}</div>
                 </div>
                 <button 
                   onClick={() => removeAt(idx)} 
@@ -54,13 +54,13 @@ export default function Cart() {
             <div className="flex justify-end gap-4">
               <button 
                 onClick={() => navigate('/menu')} 
-                className="px-6 py-3 border-2 border-blue-600 text-blue-600 rounded-lg font-bold hover:bg-blue-50 transition-colors"
+                className="px-6 py-3 border-2 border-primary text-primary rounded-lg font-bold hover:bg-primary/10 transition-colors"
               >
                 Continue Shopping
               </button>
               <button 
                 onClick={() => navigate('/checkout')} 
-                className="px-8 py-3 bg-blue-600 text-white rounded-lg font-bold hover:bg-blue-700 transition-colors"
+                className="px-8 py-3 bg-primary text-white rounded-lg font-bold hover:bg-primary-600 transition-colors"
               >
                 Proceed to Checkout
               </button>
