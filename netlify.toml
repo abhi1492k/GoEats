@@ -1,0 +1,13 @@
+[build]
+  command = "npm run build --prefix frontend"
+  publish = "frontend/dist"
+  functions = "functions"
+
+[dev]
+  command = "npm run dev --prefix frontend"
+
+[context.production.environment]
+  NODE_VERSION = "18"
+
+[plugins]
+  # Add Netlify plugins here if desired

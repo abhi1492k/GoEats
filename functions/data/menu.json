@@ -1,0 +1,7 @@
+[
+  { "id": 1, "name": "Idli Sambhar", "price": 60, "category": "Breakfast" },
+  { "id": 2, "name": "Dosa (Masala)", "price": 120, "category": "Breakfast" },
+  { "id": 3, "name": "Chicken Biryani", "price": 220, "category": "Main" },
+  { "id": 4, "name": "Paneer Butter Masala", "price": 180, "category": "Main" },
+  { "id": 5, "name": "Gulab Jamun", "price": 40, "category": "Dessert" }
+]
