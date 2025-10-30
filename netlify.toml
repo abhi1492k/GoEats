@@ -1,16 +1,15 @@
 [build]
-  command = "npm run build"
-  publish = "build"
+  # Install both frontend and functions deps, then build the frontend
+  command = "npm run install:all && npm run build --prefix frontend"
+  publish = "frontend/dist"
   functions = "functions"
 
 [dev]
-  command = "npm run dev"
+  # Start the frontend dev server (use netlify dev for local functions emulation)
+  command = "npm run dev --prefix frontend"
 
 [context.production.environment]
   NODE_VERSION = "18"
-
-[plugins]
-  # Add Netlify plugins here if desired
 
 [[redirects]]
   from = "/*"

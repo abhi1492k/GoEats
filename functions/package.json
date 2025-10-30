@@ -7,6 +7,13 @@
   },
   "scripts": {
     "start": "netlify-lambda serve src",
-    "build": "echo 'Netlify will build functions automatically'"
+    "build": "echo 'Netlify will build functions automatically'",
+    "test": "jest --runInBand"
+  },
+  "devDependencies": {
+    "jest": "^29.0.0"
+  },
+  "dependencies": {
+    "goeats-root": "file:.."
   }
 }
