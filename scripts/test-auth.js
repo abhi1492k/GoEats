@@ -2,9 +2,9 @@ const fs = require('fs')
 const path = require('path')
 
 async function run() {
-  const usersPath = path.join(__dirname, '..', 'functions', 'data', 'users.json')
-  // reset users
-  fs.writeFileSync(usersPath, '[]')
+  const db = require('../functions/db')
+  // reset users table
+  db.resetUsers()
 
   const signup = require('../functions/signup')
   const login = require('../functions/login')

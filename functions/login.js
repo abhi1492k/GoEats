@@ -1,20 +1,9 @@
-const fs = require('fs');
-const path = require('path');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+const { getUserByEmail } = require('./db');
 
-const USERS_PATH = path.join(__dirname, 'data', 'users.json');
 const JWT_SECRET = process.env.JWT_SECRET || 'dev-secret';
 const TOKEN_EXPIRES_IN = '7d';
-
-function readUsers() {
-  try {
-    const raw = fs.readFileSync(USERS_PATH, 'utf8');
-    return JSON.parse(raw || '[]');
-  } catch (err) {
-    return [];
-  }
-}
 
 exports.handler = async function (event) {
   try {
@@ -28,8 +17,8 @@ exports.handler = async function (event) {
       return { statusCode: 400, body: JSON.stringify({ error: 'Email and password are required' }) };
     }
 
-    const users = readUsers();
-    const user = users.find((u) => u.email === email.toLowerCase());
+    const normalized = email.toLowerCase();
+    const user = getUserByEmail(normalized);
     if (!user) {
       return { statusCode: 401, body: JSON.stringify({ error: 'Invalid credentials' }) };
     }
@@ -47,6 +36,7 @@ exports.handler = async function (event) {
       body: JSON.stringify({ token, user: { id: user.id, name: user.name, email: user.email } }),
     };
   } catch (err) {
+    console.error('Login error', err);
     return { statusCode: 500, body: JSON.stringify({ error: 'Login failed' }) };
   }
 };
