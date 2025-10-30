@@ -14,8 +14,18 @@ exports.handler = async function (event) {
     const body = event.body ? JSON.parse(event.body) : {};
     const { name, email, password } = body;
 
+    // basic validations
     if (!email || !password) {
       return { statusCode: 400, body: JSON.stringify({ error: 'Email and password are required' }) };
+    }
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+    if (!emailRegex.test(email)) {
+      return { statusCode: 400, body: JSON.stringify({ error: 'Invalid email address' }) };
+    }
+
+    if (typeof password !== 'string' || password.length < 8) {
+      return { statusCode: 400, body: JSON.stringify({ error: 'Password must be at least 8 characters' }) };
     }
 
     const normalized = email.toLowerCase();

@@ -18,12 +18,12 @@ exports.handler = async function (event) {
     }
 
     const normalized = email.toLowerCase();
-    const user = getUserByEmail(normalized);
+    const user = await getUserByEmail(normalized);
     if (!user) {
       return { statusCode: 401, body: JSON.stringify({ error: 'Invalid credentials' }) };
     }
 
-    const ok = bcrypt.compareSync(password, user.password);
+    const ok = await bcrypt.compare(password, user.password);
     if (!ok) {
       return { statusCode: 401, body: JSON.stringify({ error: 'Invalid credentials' }) };
     }
