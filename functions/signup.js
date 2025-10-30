@@ -19,14 +19,17 @@ exports.handler = async function (event) {
     }
 
     const normalized = email.toLowerCase();
-    const exists = getUserByEmail(normalized);
+    const exists = await getUserByEmail(normalized);
     if (exists) {
       return { statusCode: 409, body: JSON.stringify({ error: 'User already exists' }) };
     }
 
-    const hashed = bcrypt.hashSync(password, 10);
+    const hashed = await bcrypt.hash(password, 10);
     const id = Date.now().toString();
-    const newUser = createUser({ id, name: name || '', email: normalized, password: hashed });
+    const newUser = await createUser({ id, name: name || '', email: normalized, password: hashed });
+    if (!newUser) {
+      throw new Error('Failed to create user');
+    }
 
     const token = jwt.sign({ sub: id, email: newUser.email }, JWT_SECRET, { expiresIn: TOKEN_EXPIRES_IN });
 

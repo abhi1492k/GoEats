@@ -14,22 +14,41 @@ const db = low(adapter)
 // defaults
 db.defaults({ users: [] }).write()
 
-function createUser({ id, name, email, password }) {
-  const user = { id, name, email, password, created_at: Date.now() }
-  db.get('users').push(user).write()
-  return db.get('users').find({ id }).value()
+async function createUser({ id, name, email, password }) {
+  try {
+    const user = { id, name, email, password, created_at: Date.now() }
+    await db.get('users').push(user).write()
+    return await db.get('users').find({ id }).value()
+  } catch (error) {
+    console.error('Error creating user:', error)
+    return null
+  }
 }
 
-function getUserByEmail(email) {
-  return db.get('users').find({ email }).value()
+async function getUserByEmail(email) {
+  try {
+    return await db.get('users').find({ email }).value()
+  } catch (error) {
+    console.error('Error getting user by email:', error)
+    return null
+  }
 }
 
-function getUserById(id) {
-  return db.get('users').find({ id }).value()
+async function getUserById(id) {
+  try {
+    return await db.get('users').find({ id }).value()
+  } catch (error) {
+    console.error('Error getting user by id:', error)
+    return null
+  }
 }
 
-function resetUsers() {
-  db.set('users', []).write()
+async function resetUsers() {
+  try {
+    await db.set('users', []).write()
+  } catch (error) {
+    console.error('Error resetting users:', error)
+  }
 }
 
 module.exports = { createUser, getUserByEmail, getUserById, resetUsers, DB_PATH }
