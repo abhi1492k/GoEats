@@ -1,9 +1,13 @@
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-const { createUser, getUserByEmail } = require('./db');
+const crypto = require('crypto')
+const { createUser, getUserByEmail, updateUser } = require('./db');
+const { sendEmail } = require('./email')
+const logger = require('./logger')
 
 const JWT_SECRET = process.env.JWT_SECRET || 'dev-secret';
 const TOKEN_EXPIRES_IN = '7d';
+const FUNCTIONS_BASE = process.env.FUNCTIONS_BASE || 'http://localhost:8888'
 
 exports.handler = async function (event) {
   try {
@@ -41,7 +45,17 @@ exports.handler = async function (event) {
       throw new Error('Failed to create user');
     }
 
-    const token = jwt.sign({ sub: id, email: newUser.email }, JWT_SECRET, { expiresIn: TOKEN_EXPIRES_IN });
+    // generate email verification token and send email (non-blocking fail-safe)
+    try {
+      const verificationToken = crypto.randomBytes(20).toString('hex')
+      await updateUser(newUser.id, { verificationToken, verified: false })
+      const verifyUrl = `${FUNCTIONS_BASE}/.netlify/functions/verify-email?token=${verificationToken}`
+      await sendEmail({ to: newUser.email, subject: 'Verify your email', text: `Click to verify: ${verifyUrl}`, html: `<p>Click to verify: <a href="${verifyUrl}">${verifyUrl}</a></p>` })
+    } catch (e) {
+      logger.error('Failed to queue verification email', e)
+    }
+
+  const token = jwt.sign({ sub: id, email: newUser.email }, JWT_SECRET, { expiresIn: TOKEN_EXPIRES_IN });
 
     return {
       statusCode: 201,
@@ -49,7 +63,7 @@ exports.handler = async function (event) {
       body: JSON.stringify({ token, user: { id: newUser.id, name: newUser.name, email: newUser.email } }),
     };
   } catch (err) {
-    console.error('Signup error', err);
+    logger.error('Signup error', err);
     return { statusCode: 500, body: JSON.stringify({ error: 'Signup failed' }) };
   }
 };

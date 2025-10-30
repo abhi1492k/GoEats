@@ -12,7 +12,7 @@ const adapter = new FileSync(DB_PATH)
 const db = low(adapter)
 
 // defaults
-db.defaults({ users: [] }).write()
+db.defaults({ users: [], outbox: [] }).write()
 
 async function createUser({ id, name, email, password }) {
   try {
@@ -43,6 +43,24 @@ async function getUserById(id) {
   }
 }
 
+async function getUserByVerificationToken(token) {
+  try {
+    return await db.get('users').find({ verificationToken: token }).value()
+  } catch (error) {
+    console.error('Error getting user by verification token:', error)
+    return null
+  }
+}
+
+async function getUserByResetToken(token) {
+  try {
+    return await db.get('users').find({ resetToken: token }).value()
+  } catch (error) {
+    console.error('Error getting user by reset token:', error)
+    return null
+  }
+
+}
 async function resetUsers() {
   try {
     await db.set('users', []).write()
@@ -51,4 +69,27 @@ async function resetUsers() {
   }
 }
 
-module.exports = { createUser, getUserByEmail, getUserById, resetUsers, DB_PATH }
+async function updateUser(id, updates) {
+  try {
+    const user = db.get('users').find({ id })
+    if (!user.value()) return null
+    // assign updates
+    await user.assign(updates).write()
+    return db.get('users').find({ id }).value()
+  } catch (error) {
+    console.error('Error updating user:', error)
+    return null
+  }
+}
+
+async function addOutbox(entry) {
+  try {
+    await db.get('outbox').push(Object.assign({ created_at: Date.now() }, entry)).write()
+    return true
+  } catch (error) {
+    console.error('Error adding outbox entry:', error)
+    return false
+  }
+}
+
+module.exports = { createUser, getUserByEmail, getUserById, getUserByVerificationToken, getUserByResetToken, resetUsers, updateUser, addOutbox, DB_PATH }
